@@ -133,7 +133,7 @@ for stat in stats:
         sheet["D" + str(counter)] = adgroup[1]
         sheet["E" + str(counter)] = adgroup[2]
         sheet["B" + str(counter)].number_format = '#,###'
-        sheet["C" + str(counter)].number_format = '#,###'
+        if adgroup[0] != 0: sheet["C" + str(counter)].number_format = '#,###'
         sheet["D" + str(counter)].number_format = '#,##0.00 €'
         sheet["E" + str(counter)].number_format = '#,##0.00 €'
     for column in ["A", "B", "C", "D", "E"]: sheet[column + str(counter)].border = bottom_border_thin
