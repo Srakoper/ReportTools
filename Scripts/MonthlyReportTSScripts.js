@@ -1,7 +1,3 @@
-/*****************
- WORK IN PROGRESS!
- ****************/
-
 /**
  * Gets statistics for all ad groups from a given period, sorted by label.
  * Statistics: ad group name, clicks, CPC, cost, label
