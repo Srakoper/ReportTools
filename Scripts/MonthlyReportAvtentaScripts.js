@@ -60,9 +60,9 @@ function buildCSV(data) {
         var split = key2.split(";");
         csv = csv + key1 + ";" + data[key1][i][key2]["clicks"] + ";" + data[key1][i][key2]["impressions"] + ";" + data[key1][i][key2]["cpc"] + ";" + data[key1][i][key2]["cost"] + ";" + split[0] + ";" + split[1] + "\n";
       }
-     
+
     }
-    
+
   }
   return csv;
 }
@@ -96,7 +96,9 @@ function main() {
 	//sendEmail("maja.cebulj@tsmedia.si", "GAdW Stats Report for Avtenta, MISSING LABELS! ", "", "GAdW ad groups without labels:\n\n" + stats_data + "\nApply labels and rerun Monthly Report script.");
   } else {
     var csv_data = buildCSV(stats_data);
-    sendEmail("damjan.mihelic@tsmedia.si", "GAdW Stats Report for Avtenta, Previous Month, CSV ", "", csv_data, "GAdW_Avtenta_CSV_" + previous.getFullYear() + "-" + ((previous.getMonth() + 2 >= 10) ? previous.getMonth() + 2 : "0" + String(previous.getMonth() + 2)) + ".csv", 'text/csv');
+    // sendEmail("damjan.mihelic@tsmedia.si", "GAdW Stats Report for Avtenta, Previous Month, CSV ", "", csv_data, "GAdW_Avtenta_CSV_" + previous.getFullYear() + "-" + ((previous.getMonth() + 2 >= 10) ? previous.getMonth() + 2 : "0" + String(previous.getMonth() + 2)) + ".csv", 'text/csv');
     sendEmail("maja.cebulj@tsmedia.si", "GAdW Stats Report for Avtenta, Previous Month, CSV ", "", csv_data, "GAdW_Avtenta_CSV_" + previous.getFullYear() + "-" + ((previous.getMonth() + 2 >= 10) ? previous.getMonth() + 2 : "0" + String(previous.getMonth() + 2)) + ".csv", 'text/csv');
+    sendEmail("alen.savic@tsmedia.si", "GAdW Stats Report for Avtenta, Previous Month, CSV ", "", csv_data, "GAdW_Avtenta_CSV_" + previous.getFullYear() + "-" + ((previous.getMonth() + 2 >= 10) ? previous.getMonth() + 2 : "0" + String(previous.getMonth() + 2)) + ".csv", 'text/csv');
+    sendEmail("urska.grad@tsmedia.si", "GAdW Stats Report for Avtenta, Previous Month, CSV ", "", csv_data, "GAdW_Avtenta_CSV_" + previous.getFullYear() + "-" + ((previous.getMonth() + 2 >= 10) ? previous.getMonth() + 2 : "0" + String(previous.getMonth() + 2)) + ".csv", 'text/csv');
   }
 }

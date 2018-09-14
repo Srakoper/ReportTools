@@ -20,7 +20,7 @@ function getStatsFromAdGroups(period) {
         var label = labelsIterator.next().getName();
         if (label.substr(0,4).toLowerCase() !== "link") {labels.push(label);} // ignores LinkChecker labels
       }
-      if (labels[0] === undefined) {
+      if (labels[0] === undefined && adGroupName !== "Android Games") {
         noLabels.push(adGroupName);
       }
       temp = {};
@@ -55,9 +55,9 @@ function buildCSV(data) {
         var split = key2.split(";");
         csv = csv + key1 + ";" + data[key1][i][key2]["clicks"] + ";" + data[key1][i][key2]["cpc"] + ";" + data[key1][i][key2]["cost"] + ";" + split[0] + ";" + split[1] + "\n";
       }
-     
+
     }
-    
+
   }
   return csv;
 }
@@ -87,11 +87,15 @@ function main() {
   var previous = getPrevMonth();
   var stats_data = getStatsFromAdGroups("LAST_MONTH");
   if (typeof stats_data === "string") {
-    sendEmail("damjan.mihelic@tsmedia.si", "GAdW Stats Report for Telekom, MISSING LABELS! ", "", "GAdW ad groups without labels:\n\n" + stats_data + "\nApply labels and rerun Monthly Report script.");
-	sendEmail("maja.cebulj@tsmedia.si", "GAdW Stats Report for Telekom, MISSING LABELS! ", "", "GAdW ad groups without labels:\n\n" + stats_data + "\nApply labels and rerun Monthly Report script.");
+    // sendEmail("damjan.mihelic@tsmedia.si", "GAdW Stats Report for Telekom, MISSING LABELS! ", "", "GAdW ad groups without labels:\n\n" + stats_data + "\nApply labels and rerun Monthly Report script.");
+	  sendEmail("maja.cebulj@tsmedia.si", "GAdW Stats Report for Telekom, MISSING LABELS! ", "", "GAdW ad groups without labels:\n\n" + stats_data + "\nApply labels and rerun Monthly Report script.");
+    sendEmail("alen.savic@tsmedia.si", "GAdW Stats Report for Telekom, MISSING LABELS! ", "", "GAdW ad groups without labels:\n\n" + stats_data + "\nApply labels and rerun Monthly Report script.");
+    sendEmail("urska.grad@tsmedia.si", "GAdW Stats Report for Telekom, MISSING LABELS! ", "", "GAdW ad groups without labels:\n\n" + stats_data + "\nApply labels and rerun Monthly Report script.");
   } else {
     var csv_data = buildCSV(stats_data);
-    sendEmail("damjan.mihelic@tsmedia.si", "GAdW Stats Report for Telekom, Previous Month, CSV ", "", csv_data, "GAdW_Telekom_CSV_" + previous.getFullYear() + "-" + ((previous.getMonth() + 2 >= 10) ? previous.getMonth() + 2 : "0" + String(previous.getMonth() + 2)) + ".csv", 'text/csv');
+    // sendEmail("damjan.mihelic@tsmedia.si", "GAdW Stats Report for Telekom, Previous Month, CSV ", "", csv_data, "GAdW_Telekom_CSV_" + previous.getFullYear() + "-" + ((previous.getMonth() + 2 >= 10) ? previous.getMonth() + 2 : "0" + String(previous.getMonth() + 2)) + ".csv", 'text/csv');
     sendEmail("maja.cebulj@tsmedia.si", "GAdW Stats Report for Telekom, Previous Month, CSV ", "", csv_data, "GAdW_Telekom_CSV_" + previous.getFullYear() + "-" + ((previous.getMonth() + 2 >= 10) ? previous.getMonth() + 2 : "0" + String(previous.getMonth() + 2)) + ".csv", 'text/csv');
+    sendEmail("alen.savic@tsmedia.si", "GAdW Stats Report for Telekom, Previous Month, CSV ", "", csv_data, "GAdW_Telekom_CSV_" + previous.getFullYear() + "-" + ((previous.getMonth() + 2 >= 10) ? previous.getMonth() + 2 : "0" + String(previous.getMonth() + 2)) + ".csv", 'text/csv');
+    sendEmail("urska.grad@tsmedia.si", "GAdW Stats Report for Telekom, Previous Month, CSV ", "", csv_data, "GAdW_Telekom_CSV_" + previous.getFullYear() + "-" + ((previous.getMonth() + 2 >= 10) ? previous.getMonth() + 2 : "0" + String(previous.getMonth() + 2)) + ".csv", 'text/csv');
   }
 }
